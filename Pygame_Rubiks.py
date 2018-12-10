@@ -6,11 +6,6 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-pygame.init()
-
-display_width = 800
-display_height = 600
-
 #testing with 4x4 cube, hopes that it may work for higher level cubes
 n = 4
 rows = n
@@ -27,16 +22,9 @@ yellow = (0.7, 0.7, 0)   #(255, 255, 0) # Top
 black = (0, 0, 0)
 white = (255, 255, 255)
 
-gameDisplay = pygame.display.set_mode((display_width, display_height)) #set resolution, (width, height)
-pygame.display.set_caption('Rubiks Cube') #Name displayed on bar
-clock = pygame.time.Clock()#define game clock
-
-
 class Square():
-    """These square's colours will be changable by certain face functions"""
 
     def __init__(self, row, col, colour):
-        """initially assigned colour by the face"""
         self.row = row
         self.col = col
         self.colour = colour
@@ -77,19 +65,18 @@ class Square():
         glVertex3f(i+1, n, j)
         glEnd()
 
-
 class Face():
 
     def __init__(self,name, colour):
         self.squares = []
         self.name = name
         self.colour = colour
-        for i in range(rows): #creation of individual squares
+        for i in range(rows): 
             for j in range(cols):
                 self.squares.append(Square(str(i), str(j), self.colour))
         self.colour = None #removing attribute to ensure no confusion later
 
-    def __str__(self): #could be used in pygame?
+    def __str__(self):
         return self.name
 
     def colours(self):
@@ -113,8 +100,6 @@ class Face():
         for square in self.squares:
             square.GLDraw_Square_Top()
 
-
-
 class Cube(object):
 
     def __init__(self):
@@ -123,7 +108,7 @@ class Cube(object):
             self.faces.append(Face(i[0], i[1]))
 
     def print_cube(self):
-        """Displays faces with list of their colours"""
+        """Displays faces with list of their colours in interpreter"""
         for face in range(0, 6):
             print(self.faces[face])
             for j in range(0, n):
@@ -216,7 +201,6 @@ class Cube(object):
         glEnd()
 
 #now that the cube is created, the pygame code follows
-
 def main():
     pygame.init()
     display = (800, 600)
@@ -270,19 +254,14 @@ def main():
                 if event.key == pygame.K_DOWN:
                     Rubiks.rotation('down', x)
 
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT) # clear frame to draw on top (specifically the things we have specified)
-
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT) 
+        
         """GL Function drawings"""
         Rubiks.GL_Draw_Cube()
 
-        """GL Test drawings"""
-
-
-        #glFlush() #rushes things along (even if images are not finished)
         pygame.display.flip()
         pygame.time.wait(10)
 
-Rubiks = Cube() #create cube
+Rubiks = Cube() 
 Front, Back, Left, Right, Top, Bottom = Rubiks.faces[0], Rubiks.faces[1], Rubiks.faces[2], Rubiks.faces[3], Rubiks.faces[4], Rubiks.faces[5]
-
 main()
