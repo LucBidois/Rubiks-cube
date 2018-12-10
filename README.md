@@ -3,7 +3,7 @@
 To solidify my understanding of OOP principles I have decided to create a Rubiks Cube.
 
 The steps taken to complete this task are as follows:
-- Use classes to create any N^3 cube.
+- Use classes to create any N**3 cube.
 - Create functions do simulate rotating faces and sides.  
 - Add loop to allow user input for testing. 
 - Use Pygame with OpenGL to create a visual Cube.
