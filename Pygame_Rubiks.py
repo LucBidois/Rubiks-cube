@@ -6,7 +6,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-#testing with 4x4 cube, hopes that it may work for higher level cubes
+#testing with 4x4 cube (works for nxn)
 n = 4
 rows = n
 cols = n
