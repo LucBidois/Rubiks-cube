@@ -1,15 +1,13 @@
-from typing import Tuple
-
 from OpenGL.GL import glBegin, glColor3fv, glEnd
 from OpenGL.raw.GL.VERSION.GL_1_0 import glVertex3f
 from OpenGL.raw.GL.VERSION.GL_4_0 import GL_QUADS
 
-from Config import N
+from Config import Color, N
 
 
 class Square:
 
-    def __init__(self, row: int, col: int, color: Tuple[float, float, float]):
+    def __init__(self, row: int, col: int, color: Color):
         self.row = row
         self.col = col
         self.color = color
