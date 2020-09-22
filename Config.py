@@ -1,4 +1,7 @@
 # testing with 4x4 cube (works for nxn)
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 1024
+
 N = 4
 ROWS = N
 COLS = N
