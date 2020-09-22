@@ -61,6 +61,10 @@ def main():
                 if event.key == pygame.K_DOWN:
                     Rubiks.rotation('down', x)
 
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    quit()
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         """GL Function drawings"""
