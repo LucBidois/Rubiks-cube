@@ -15,35 +15,36 @@ class Square:
     def __str__(self):
         return "{} {}".format(self.row, self.col)
 
-    def GLDraw_Square_Front(self):
-        j = self.row
-        i = self.col
-        glColor3fv(self.color)
-        glBegin(GL_QUADS)
+    @staticmethod
+    def GLDraw_Square_Front(i, j):
         glVertex3f(i, N - j - 1, N)
         glVertex3f(i, N - j, N)
         glVertex3f(i + 1, N - j, N)
         glVertex3f(i + 1, N - j - 1, N)
-        glEnd()
 
-    def GLDraw_Square_Right(self):
-        j = self.row
-        i = self.col
-        glColor3fv(self.color)
-        glBegin(GL_QUADS)
+    @staticmethod
+    def GLDraw_Square_Right(i, j):
         glVertex3f(N, N - j - 1, N - i)
         glVertex3f(N, N - j, N - i)
         glVertex3f(N, N - j, N - i - 1)
         glVertex3f(N, N - j - 1, N - i - 1)
-        glEnd()
 
-    def GLDraw_Square_Top(self):
-        j = self.row
-        i = self.col
-        glColor3fv(self.color)
-        glBegin(GL_QUADS)
+    @staticmethod
+    def GLDraw_Square_Top(i, j):
         glVertex3f(i, N, j)
         glVertex3f(i, N, j + 1)
         glVertex3f(i + 1, N, j + 1)
         glVertex3f(i + 1, N, j)
+
+    def GLDraw_Square(self, orientation: str):
+        orientation = orientation.lower()
+        j, i = self.row, self.col
+        glColor3fv(self.color)
+        glBegin(GL_QUADS)
+        if orientation == "front":
+            self.GLDraw_Square_Front(i, j)
+        elif orientation == "right":
+            self.GLDraw_Square_Right(i, j)
+        elif orientation == "top":
+            self.GLDraw_Square_Top(i, j)
         glEnd()

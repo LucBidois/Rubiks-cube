@@ -31,7 +31,7 @@ class Cube(object):
             for i in range(0, N):
                 Front.squares[pos * N + i].color, Right.squares[pos * N + i].color, Back.squares[pos * N + i].color, \
                 Left.squares[pos * N + i].color = Left.squares[pos * N + i].color, Front.squares[pos * N + i].color, \
-                                                   Right.squares[pos * N + i].color, Back.squares[pos * N + i].color
+                                                  Right.squares[pos * N + i].color, Back.squares[pos * N + i].color
 
             if pos == 0:
                 """rotation of the top face"""
@@ -50,14 +50,14 @@ class Cube(object):
             for i in range(0, N):
                 Front.squares[pos + i * N].color, Top.squares[pos + i * N].color, Back.squares[
                     (N ** 2 - 1) - (N * i) - pos].color, Bottom.squares[pos + N * i].color = Bottom.squares[
-                                                                                                   pos + i * N].color, \
-                                                                                               Front.squares[
-                                                                                                   pos + i * N].color, \
-                                                                                               Top.squares[
-                                                                                                   pos + i * N].color, \
-                                                                                               Back.squares[
-                                                                                                   (N ** 2 - 1) - (
-                                                                                                           N * i) - pos].color
+                                                                                                 pos + i * N].color, \
+                                                                                             Front.squares[
+                                                                                                 pos + i * N].color, \
+                                                                                             Top.squares[
+                                                                                                 pos + i * N].color, \
+                                                                                             Back.squares[
+                                                                                                 (N ** 2 - 1) - (
+                                                                                                         N * i) - pos].color
 
             if pos == 0:
                 self.Face_Spin_Anticlockwise(2)  # left face
@@ -91,9 +91,9 @@ class Cube(object):
             self.rotation(moves[x], y)
 
     def GL_Draw_Cube(self):
-        self.faces[0].GL_Draw_Face_Front()
-        self.faces[3].GL_Draw_Face_Right()
-        self.faces[4].GL_Draw_Face_Top()
+        self.faces[0].GLDraw_Face("Front")
+        self.faces[3].GLDraw_Face("Right")
+        self.faces[4].GLDraw_Face("Top")
         self.GL_Square_Separation_Lines()
 
     @staticmethod

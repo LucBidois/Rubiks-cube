@@ -18,14 +18,6 @@ class Face:
         """
         return tuple(self.squares[i].color for i in range(N ** 2))
 
-    def GL_Draw_Face_Front(self):
+    def GLDraw_Face(self, orientation):
         for square in self.squares:
-            square.GLDraw_Square_Front()
-
-    def GL_Draw_Face_Right(self):
-        for square in self.squares:
-            square.GLDraw_Square_Right()
-
-    def GL_Draw_Face_Top(self):
-        for square in self.squares:
-            square.GLDraw_Square_Top()
+            square.GLDraw_Square(orientation)
