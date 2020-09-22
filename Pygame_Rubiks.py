@@ -1,26 +1,26 @@
 from random import randint
-import pygame
-import time
-from pygame.locals import *
 
+import pygame
 from OpenGL.GL import *
 from OpenGL.GLU import *
+from pygame.locals import *
 
-#testing with 4x4 cube (works for nxn)
+# testing with 4x4 cube (works for nxn)
 n = 4
 rows = n
 cols = n
 
-#define colours (useful for pygame implementation)
-Orange = (1.0, 0.5, 0) #(255, 130, 0) #Front
-white = (0.7, 0.7, 0.7)    #(255, 255, 255) #Bottom
-blue = (0, 0, 0.5)     #(0, 0, 255) # Right
-red = (0.5, 0, 0)      #(255, 0, 0) # Back
-green = (0, 0.5, 0)    #(0, 255, 0) # Left
-yellow = (0.7, 0.7, 0)   #(255, 255, 0) # Top
+# define colours (useful for pygame implementation)
+Orange = (1.0, 0.5, 0)  # (255, 130, 0) #Front
+white = (0.7, 0.7, 0.7)  # (255, 255, 255) #Bottom
+blue = (0, 0, 0.5)  # (0, 0, 255) # Right
+red = (0.5, 0, 0)  # (255, 0, 0) # Back
+green = (0, 0.5, 0)  # (0, 255, 0) # Left
+yellow = (0.7, 0.7, 0)  # (255, 255, 0) # Top
 
 black = (0, 0, 0)
 white = (255, 255, 255)
+
 
 class Square():
 
@@ -37,10 +37,10 @@ class Square():
         i = int(self.col)
         glColor3fv(self.colour)
         glBegin(GL_QUADS)
-        glVertex3f(i, n-j-1, n)
-        glVertex3f(i, n-j, n)
-        glVertex3f(i+1, n-j, n)
-        glVertex3f(i+1, n-j-1, n)
+        glVertex3f(i, n - j - 1, n)
+        glVertex3f(i, n - j, n)
+        glVertex3f(i + 1, n - j, n)
+        glVertex3f(i + 1, n - j - 1, n)
         glEnd()
 
     def GLDraw_Square_Right(self):
@@ -48,10 +48,10 @@ class Square():
         i = int(self.col)
         glColor3fv(self.colour)
         glBegin(GL_QUADS)
-        glVertex3f(n, n-j-1, n-i)
-        glVertex3f(n, n-j, n-i)
-        glVertex3f(n, n-j, n-i-1)
-        glVertex3f(n, n-j-1, n-i-1)
+        glVertex3f(n, n - j - 1, n - i)
+        glVertex3f(n, n - j, n - i)
+        glVertex3f(n, n - j, n - i - 1)
+        glVertex3f(n, n - j - 1, n - i - 1)
         glEnd()
 
     def GLDraw_Square_Top(self):
@@ -60,21 +60,22 @@ class Square():
         glColor3fv(self.colour)
         glBegin(GL_QUADS)
         glVertex3f(i, n, j)
-        glVertex3f(i, n, j+1)
-        glVertex3f(i+1, n, j+1)
-        glVertex3f(i+1, n, j)
+        glVertex3f(i, n, j + 1)
+        glVertex3f(i + 1, n, j + 1)
+        glVertex3f(i + 1, n, j)
         glEnd()
+
 
 class Face():
 
-    def __init__(self,name, colour):
+    def __init__(self, name, colour):
         self.squares = []
         self.name = name
         self.colour = colour
-        for i in range(rows): 
+        for i in range(rows):
             for j in range(cols):
                 self.squares.append(Square(str(i), str(j), self.colour))
-        self.colour = None #removing attribute to ensure no confusion later
+        self.colour = None  # removing attribute to ensure no confusion later
 
     def __str__(self):
         return self.name
@@ -83,7 +84,7 @@ class Face():
         """returns a tupled list of colours to use before
         as the 'before' movement when changing colours"""
         dummylist = []
-        for i in range(0, n**2):
+        for i in range(0, n ** 2):
             dummylist.append(self.squares[i].colour)
         dummylist = tuple(dummylist)
         return dummylist
@@ -100,11 +101,13 @@ class Face():
         for square in self.squares:
             square.GLDraw_Square_Top()
 
+
 class Cube(object):
 
     def __init__(self):
         self.faces = []
-        for i in [('Front', Orange), ('Back', red), ('Left', green), ('Right', blue), ('Top', yellow ), ('Bottom', white)]:
+        for i in [('Front', Orange), ('Back', red), ('Left', green), ('Right', blue), ('Top', yellow),
+                  ('Bottom', white)]:
             self.faces.append(Face(i[0], i[1]))
 
     def print_cube(self):
@@ -112,7 +115,7 @@ class Cube(object):
         for face in range(0, 6):
             print(self.faces[face])
             for j in range(0, n):
-                print(self.faces[face].colours()[4*j:4*j + n])
+                print(self.faces[face].colours()[4 * j:4 * j + n])
 
     def rotation(self, direction, pos):
         """rotations are always relative to the front face,
@@ -120,30 +123,41 @@ class Cube(object):
 
         if direction == 'right':
             for i in range(0, n):
-                Front.squares[pos*n + i].colour, Right.squares[pos*n + i].colour, Back.squares[pos*n + i].colour, Left.squares[pos*n + i].colour = Left.squares[pos*n + i].colour, Front.squares[pos*n + i].colour, Right.squares[pos*n + i].colour, Back.squares[pos*n + i].colour
+                Front.squares[pos * n + i].colour, Right.squares[pos * n + i].colour, Back.squares[pos * n + i].colour, \
+                Left.squares[pos * n + i].colour = Left.squares[pos * n + i].colour, Front.squares[pos * n + i].colour, \
+                                                   Right.squares[pos * n + i].colour, Back.squares[pos * n + i].colour
 
             if pos == 0:
                 """rotation of the top face"""
                 self.Face_Spin_Anticlockwise(4)
 
-            elif pos == n-1:
+            elif pos == n - 1:
                 """bottom face spins clockwise normally"""
                 for i in range(0, 3):
                     self.Face_Spin_Anticlockwise(5)
 
-        if direction =='left':
-            for i in range(0,3):
+        if direction == 'left':
+            for i in range(0, 3):
                 self.rotation('right', pos)
 
         if direction == 'up':
             for i in range(0, n):
-                Front.squares[pos + i*n].colour, Top.squares[pos + i*n].colour, Back.squares[(n**2-1) - (n*i) - pos].colour, Bottom.squares[pos + n*i].colour = Bottom.squares[pos + i*n].colour, Front.squares[pos + i*n].colour, Top.squares[pos + i*n].colour, Back.squares[(n**2-1) - (n*i) - pos].colour
+                Front.squares[pos + i * n].colour, Top.squares[pos + i * n].colour, Back.squares[
+                    (n ** 2 - 1) - (n * i) - pos].colour, Bottom.squares[pos + n * i].colour = Bottom.squares[
+                                                                                                   pos + i * n].colour, \
+                                                                                               Front.squares[
+                                                                                                   pos + i * n].colour, \
+                                                                                               Top.squares[
+                                                                                                   pos + i * n].colour, \
+                                                                                               Back.squares[
+                                                                                                   (n ** 2 - 1) - (
+                                                                                                               n * i) - pos].colour
 
             if pos == 0:
-                self.Face_Spin_Anticlockwise(2) #left face
-            elif pos == n-1:
+                self.Face_Spin_Anticlockwise(2)  # left face
+            elif pos == n - 1:
                 for i in range(0, 3):
-                    self.Face_Spin_Anticlockwise(3) #right face
+                    self.Face_Spin_Anticlockwise(3)  # right face
 
         if direction == 'down':
             for i in range(0, 3):
@@ -152,13 +166,13 @@ class Cube(object):
     def Face_Spin_Anticlockwise(self, face):
         """this deals with the complicated spinning faces"""
 
-        old_Colours = tuple(self.faces[face].colours()) #list of squares on top
+        old_Colours = tuple(self.faces[face].colours())  # list of squares on top
         for j in range(0, n):
-            colour_Index = (n-1) - j
+            colour_Index = (n - 1) - j
             for i in range(0, n):
-                self.faces[face].squares[i + n*j].colour = old_Colours[colour_Index]
-                if colour_Index > n*(n-1):
-                    colour_Index -= n*(n-1)
+                self.faces[face].squares[i + n * j].colour = old_Colours[colour_Index]
+                if colour_Index > n * (n - 1):
+                    colour_Index -= n * (n - 1)
                 else:
                     colour_Index += n
 
@@ -167,7 +181,7 @@ class Cube(object):
         moves = ['up', 'down', 'right', 'left']
         for i in range(0, 100):
             x = randint(0, 3)
-            y = randint(0, n-1)
+            y = randint(0, n - 1)
             self.rotation(moves[x], y)
 
     def GL_Draw_Cube(self):
@@ -178,43 +192,44 @@ class Cube(object):
 
     def GL_Square_Sepearation_Lines(self):
         glBegin(GL_LINES)
-        glColor3f(0.5,0.5,0.5)
+        glColor3f(0.5, 0.5, 0.5)
         for lineIndex in range(1, n):
-            #front width
+            # front width
             glVertex3f(0, lineIndex, n)
             glVertex3f(n, lineIndex, n)
-            #front height
+            # front height
             glVertex3f(lineIndex, 0, n)
             glVertex3f(lineIndex, n, n)
-            #side depth
+            # side depth
             glVertex3f(n, lineIndex, 0)
             glVertex3f(n, lineIndex, n)
-            #side height
+            # side height
             glVertex3f(n, 0, lineIndex)
             glVertex3f(n, n, lineIndex)
-            #top width
+            # top width
             glVertex3f(0, n, lineIndex)
             glVertex3f(n, n, lineIndex)
-            #top depth
+            # top depth
             glVertex3f(lineIndex, n, 0)
             glVertex3f(lineIndex, n, n)
         glEnd()
 
-#now that the cube is created, the pygame code follows
+
+# now that the cube is created, the pygame code follows
 def main():
     pygame.init()
     display = (800, 600)
-    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
 
     """GL Initialising function area"""
-    gluPerspective(45, (display[0]/display[1]), 0.1, 500)
+    gluPerspective(45, (display[0] / display[1]), 0.1, 500)
 
     glClearColor(0.0, 0.0, 0.0, 0.0)
     glClearDepth(1.0)
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     glTranslate(0, 0, -20)
-    glRotate(35, 1, -1,0)
+    glRotate(35, 1, -1, 0)
 
     x = 0
     while True:
@@ -254,14 +269,16 @@ def main():
                 if event.key == pygame.K_DOWN:
                     Rubiks.rotation('down', x)
 
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT) 
-        
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
         """GL Function drawings"""
         Rubiks.GL_Draw_Cube()
 
         pygame.display.flip()
         pygame.time.wait(10)
 
-Rubiks = Cube() 
-Front, Back, Left, Right, Top, Bottom = Rubiks.faces[0], Rubiks.faces[1], Rubiks.faces[2], Rubiks.faces[3], Rubiks.faces[4], Rubiks.faces[5]
+
+Rubiks = Cube()
+Front, Back, Left, Right, Top, Bottom = Rubiks.faces[0], Rubiks.faces[1], Rubiks.faces[2], Rubiks.faces[3], \
+                                        Rubiks.faces[4], Rubiks.faces[5]
 main()
