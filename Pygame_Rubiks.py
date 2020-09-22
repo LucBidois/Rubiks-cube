@@ -3,18 +3,17 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from pygame.locals import DOUBLEBUF, OPENGL
 
-from Config import N, SCREEN_HEIGHT, SCREEN_WIDTH
+from Config import ASPECT_RATIO, DIMENSIONS, N
 from Shapes.Cube import Cube
 
 
 # now that the cube is created, the pygame code follows
 def main():
     pygame.init()
-    display = (SCREEN_WIDTH, SCREEN_HEIGHT)
-    pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
+    pygame.display.set_mode(DIMENSIONS, DOUBLEBUF | OPENGL)
 
     """GL Initialising function area"""
-    gluPerspective(45, (display[0] / display[1]), 0.1, 500)
+    gluPerspective(45, ASPECT_RATIO, 0.1, 500)
 
     glClearColor(0.0, 0.0, 0.0, 0.0)
     glClearDepth(1.0)
