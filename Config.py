@@ -1,14 +1,15 @@
-# testing with 4x4 cube (works for nxn)
+# Display Parameters
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 1024
 DIMENSIONS = (SCREEN_WIDTH, SCREEN_HEIGHT)
 ASPECT_RATIO = SCREEN_WIDTH / SCREEN_HEIGHT
 
+# Cube Parameters
 N = 4
 ROWS = N
 COLS = N
 
-# define colors (useful for pygame implementation)
+# Constants
 COLORS = {
     "red": (0.5, 0, 0),  # (255, 0, 0) # Back
     "orange": (1.0, 0.5, 0),  # (255, 130, 0) # Front
