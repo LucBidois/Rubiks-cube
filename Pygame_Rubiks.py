@@ -5,21 +5,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from pygame.locals import *
 
-# testing with 4x4 cube (works for nxn)
-n = 4
-rows = n
-cols = n
-
-# define colours (useful for pygame implementation)
-Orange = (1.0, 0.5, 0)  # (255, 130, 0) #Front
-white = (0.7, 0.7, 0.7)  # (255, 255, 255) #Bottom
-blue = (0, 0, 0.5)  # (0, 0, 255) # Right
-red = (0.5, 0, 0)  # (255, 0, 0) # Back
-green = (0, 0.5, 0)  # (0, 255, 0) # Left
-yellow = (0.7, 0.7, 0)  # (255, 255, 0) # Top
-
-black = (0, 0, 0)
-white = (255, 255, 255)
+from Config import COLORS, cols, n, rows
 
 
 class Square():
@@ -106,8 +92,9 @@ class Cube(object):
 
     def __init__(self):
         self.faces = []
-        for i in [('Front', Orange), ('Back', red), ('Left', green), ('Right', blue), ('Top', yellow),
-                  ('Bottom', white)]:
+        for i in [('Front', COLORS["orange"]), ('Back', COLORS["red"]),
+                  ('Left', COLORS["green"]), ('Right', COLORS["blue"]),
+                  ('Top', COLORS["yellow"]), ('Bottom', COLORS["white"])]:
             self.faces.append(Face(i[0], i[1]))
 
     def print_cube(self):
@@ -151,7 +138,7 @@ class Cube(object):
                                                                                                    pos + i * n].colour, \
                                                                                                Back.squares[
                                                                                                    (n ** 2 - 1) - (
-                                                                                                               n * i) - pos].colour
+                                                                                                           n * i) - pos].colour
 
             if pos == 0:
                 self.Face_Spin_Anticlockwise(2)  # left face
