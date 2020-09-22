@@ -1,7 +1,7 @@
 # testing with 4x4 cube (works for nxn)
-n = 4
-rows = n
-cols = n
+N = 4
+ROWS = N
+COLS = N
 
 # define colours (useful for pygame implementation)
 COLORS = {

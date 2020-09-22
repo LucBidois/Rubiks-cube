@@ -3,7 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from pygame.locals import *
 
-from Config import n
+from Config import N
 from Shapes.Cube import Cube
 
 
@@ -41,7 +41,7 @@ def main():
 
                 if event.key == pygame.K_KP_PLUS:
                     x += 1
-                    if x >= n:
+                    if x >= N:
                         x -= 1
 
                 if event.key == pygame.K_KP_MINUS:

@@ -1,4 +1,4 @@
-from Config import cols, n, rows
+from Config import COLS, N, ROWS
 from Shapes.Square import Square
 
 
@@ -8,8 +8,8 @@ class Face():
         self.squares = []
         self.name = name
         self.colour = colour
-        for i in range(rows):
-            for j in range(cols):
+        for i in range(ROWS):
+            for j in range(COLS):
                 self.squares.append(Square(str(i), str(j), self.colour))
         self.colour = None  # removing attribute to ensure no confusion later
 
@@ -20,7 +20,7 @@ class Face():
         """returns a tupled list of colours to use before
         as the 'before' movement when changing colours"""
         dummylist = []
-        for i in range(0, n ** 2):
+        for i in range(0, N ** 2):
             dummylist.append(self.squares[i].colour)
         dummylist = tuple(dummylist)
         return dummylist
