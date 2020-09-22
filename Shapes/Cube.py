@@ -96,9 +96,10 @@ class Cube(object):
         self.faces[0].GL_Draw_Face_Front()
         self.faces[3].GL_Draw_Face_Right()
         self.faces[4].GL_Draw_Face_Top()
-        self.GL_Square_Sepearation_Lines()
+        self.GL_Square_Separation_Lines()
 
-    def GL_Square_Sepearation_Lines(self):
+    @staticmethod
+    def GL_Square_Separation_Lines():
         glBegin(GL_LINES)
         glColor3f(0.5, 0.5, 0.5)
         for lineIndex in range(1, N):
