@@ -16,11 +16,7 @@ class Face:
         returns a tuple of colors to use before
         as the 'before' movement when changing colors
         """
-        dummylist = []
-        for i in range(0, N ** 2):
-            dummylist.append(self.squares[i].color)
-        dummylist = tuple(dummylist)
-        return dummylist
+        return tuple(self.squares[i].color for i in range(N ** 2))
 
     def GL_Draw_Face_Front(self):
         for square in self.squares:
