@@ -71,6 +71,5 @@ def main():
 
 
 Rubiks = Cube()
-Front, Back, Left, Right, Top, Bottom = Rubiks.faces[0], Rubiks.faces[1], Rubiks.faces[2], Rubiks.faces[3], \
-                                        Rubiks.faces[4], Rubiks.faces[5]
+
 main()

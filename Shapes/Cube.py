@@ -4,7 +4,6 @@ from OpenGL.GL import glBegin, glEnd
 from OpenGL.raw.GL.VERSION.GL_1_0 import GL_LINES, glColor3f, glVertex3f
 
 from Config import COLORS, N
-from Pygame_Rubiks import Back, Bottom, Front, Left, Right, Top
 from Shapes.Face import Face
 
 
@@ -26,7 +25,9 @@ class Cube(object):
 
     def rotation(self, direction, pos):
         """rotations are always relative to the front face,
-        this is made possible by rotating all rows/colums in the same direction we affectively change face"""
+        this is made possible by rotating all rows/columns in the same direction we affectively change face"""
+
+        Front, Back, Left, Right, Top, Bottom = self.faces
 
         if direction == 'right':
             for i in range(0, N):
