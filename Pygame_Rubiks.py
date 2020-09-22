@@ -32,8 +32,7 @@ def main():
 
             if event.type == pygame.KEYDOWN:
 
-                print(event)
-                print(position)
+                print("{} | Position: {}".format(event, position))
 
                 if event.key == pygame.K_RETURN:
                     Rubiks.scramble()
