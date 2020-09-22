@@ -39,14 +39,10 @@ def main():
                     Rubiks.scramble()
 
                 if event.key == pygame.K_KP_PLUS:
-                    position += 1
-                    if position >= N:
-                        position -= 1
+                    position = (position + 1) % N
 
                 if event.key == pygame.K_KP_MINUS:
-                    position -= 1
-                    if position < 0:
-                        position += 1
+                    position = (position - 1) % N
 
                 if event.key == pygame.K_LEFT:
                     Rubiks.rotation('left', position)
