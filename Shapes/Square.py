@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from OpenGL.GL import glBegin, glColor3fv, glEnd
 from OpenGL.raw.GL.VERSION.GL_1_0 import glVertex3f
 from OpenGL.raw.GL.VERSION.GL_4_0 import GL_QUADS
@@ -7,7 +9,7 @@ from Config import N
 
 class Square:
 
-    def __init__(self, row, col, color):
+    def __init__(self, row: int, col: int, color: Tuple[float, float, float]):
         self.row = row
         self.col = col
         self.color = color
@@ -16,27 +18,27 @@ class Square:
         return "{} {}".format(self.row, self.col)
 
     @staticmethod
-    def __GLDraw_Square_Front(i, j):
+    def __GLDraw_Square_Front(i: int, j: int) -> None:
         glVertex3f(i, N - j - 1, N)
         glVertex3f(i, N - j, N)
         glVertex3f(i + 1, N - j, N)
         glVertex3f(i + 1, N - j - 1, N)
 
     @staticmethod
-    def __GLDraw_Square_Right(i, j):
+    def __GLDraw_Square_Right(i: int, j: int) -> None:
         glVertex3f(N, N - j - 1, N - i)
         glVertex3f(N, N - j, N - i)
         glVertex3f(N, N - j, N - i - 1)
         glVertex3f(N, N - j - 1, N - i - 1)
 
     @staticmethod
-    def __GLDraw_Square_Top(i, j):
+    def __GLDraw_Square_Top(i: int, j: int) -> None:
         glVertex3f(i, N, j)
         glVertex3f(i, N, j + 1)
         glVertex3f(i + 1, N, j + 1)
         glVertex3f(i + 1, N, j)
 
-    def GLDraw_Square(self, orientation: str):
+    def GLDraw_Square(self, orientation: str) -> None:
         orientation = orientation.lower()
         j, i = self.row, self.col
         glColor3fv(self.color)
