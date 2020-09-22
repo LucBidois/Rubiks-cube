@@ -16,21 +16,21 @@ class Square:
         return "{} {}".format(self.row, self.col)
 
     @staticmethod
-    def GLDraw_Square_Front(i, j):
+    def __GLDraw_Square_Front(i, j):
         glVertex3f(i, N - j - 1, N)
         glVertex3f(i, N - j, N)
         glVertex3f(i + 1, N - j, N)
         glVertex3f(i + 1, N - j - 1, N)
 
     @staticmethod
-    def GLDraw_Square_Right(i, j):
+    def __GLDraw_Square_Right(i, j):
         glVertex3f(N, N - j - 1, N - i)
         glVertex3f(N, N - j, N - i)
         glVertex3f(N, N - j, N - i - 1)
         glVertex3f(N, N - j - 1, N - i - 1)
 
     @staticmethod
-    def GLDraw_Square_Top(i, j):
+    def __GLDraw_Square_Top(i, j):
         glVertex3f(i, N, j)
         glVertex3f(i, N, j + 1)
         glVertex3f(i + 1, N, j + 1)
@@ -42,9 +42,9 @@ class Square:
         glColor3fv(self.color)
         glBegin(GL_QUADS)
         if orientation == "front":
-            self.GLDraw_Square_Front(i, j)
+            self.__GLDraw_Square_Front(i, j)
         elif orientation == "right":
-            self.GLDraw_Square_Right(i, j)
+            self.__GLDraw_Square_Right(i, j)
         elif orientation == "top":
-            self.GLDraw_Square_Top(i, j)
+            self.__GLDraw_Square_Top(i, j)
         glEnd()
