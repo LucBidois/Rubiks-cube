@@ -14,14 +14,14 @@ class Cube(object):
                       Face('Left', COLORS["green"]), Face('Right', COLORS["blue"]),
                       Face('Top', COLORS["yellow"]), Face('Bottom', COLORS["white"])]
 
-    def print_cube(self):
+    def print_cube(self) -> None:
         """Displays faces with list of their colors in interpreter"""
         for face in range(0, 6):
             print(self.faces[face])
             for j in range(0, N):
                 print(self.faces[face].colors()[4 * j:4 * j + N])
 
-    def rotation(self, direction, pos):
+    def rotation(self, direction: str, pos: int) -> None:
         """rotations are always relative to the front face,
         this is made possible by rotating all rows/columns in the same direction we affectively change face"""
 
@@ -69,7 +69,7 @@ class Cube(object):
             for i in range(0, 3):
                 self.rotation('up', pos)
 
-    def Face_Spin_Anticlockwise(self, face):
+    def Face_Spin_Anticlockwise(self, face: int) -> None:
         """this deals with the complicated spinning faces"""
 
         old_colors = tuple(self.faces[face].colors())  # list of squares on top
@@ -82,22 +82,22 @@ class Cube(object):
                 else:
                     color_Index += N
 
-    def scramble(self):
-        "I have defined 4*n moves"
+    def scramble(self) -> None:
+        """I have defined 4*n moves"""
         moves = ['up', 'down', 'right', 'left']
         for i in range(0, 100):
             x = randint(0, 3)
             y = randint(0, N - 1)
             self.rotation(moves[x], y)
 
-    def GL_Draw_Cube(self):
+    def GL_Draw_Cube(self) -> None:
         self.faces[0].GLDraw_Face("Front")
         self.faces[3].GLDraw_Face("Right")
         self.faces[4].GLDraw_Face("Top")
         self.GL_Square_Separation_Lines()
 
     @staticmethod
-    def GL_Square_Separation_Lines():
+    def GL_Square_Separation_Lines() -> None:
         glBegin(GL_LINES)
         glColor3f(0.5, 0.5, 0.5)
         for lineIndex in range(1, N):
