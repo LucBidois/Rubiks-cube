@@ -5,20 +5,20 @@ from OpenGL.raw.GL.VERSION.GL_4_0 import GL_QUADS
 from Config import N
 
 
-class Square():
+class Square:
 
-    def __init__(self, row, col, colour):
+    def __init__(self, row, col, color):
         self.row = row
         self.col = col
-        self.colour = colour
+        self.color = color
 
     def __str__(self):
-        return self.row + self.col
+        return "{} {}".format(self.row, self.col)
 
     def GLDraw_Square_Front(self):
-        j = int(self.row)
-        i = int(self.col)
-        glColor3fv(self.colour)
+        j = self.row
+        i = self.col
+        glColor3fv(self.color)
         glBegin(GL_QUADS)
         glVertex3f(i, N - j - 1, N)
         glVertex3f(i, N - j, N)
@@ -27,9 +27,9 @@ class Square():
         glEnd()
 
     def GLDraw_Square_Right(self):
-        j = int(self.row)
-        i = int(self.col)
-        glColor3fv(self.colour)
+        j = self.row
+        i = self.col
+        glColor3fv(self.color)
         glBegin(GL_QUADS)
         glVertex3f(N, N - j - 1, N - i)
         glVertex3f(N, N - j, N - i)
@@ -38,9 +38,9 @@ class Square():
         glEnd()
 
     def GLDraw_Square_Top(self):
-        j = int(self.row)
-        i = int(self.col)
-        glColor3fv(self.colour)
+        j = self.row
+        i = self.col
+        glColor3fv(self.color)
         glBegin(GL_QUADS)
         glVertex3f(i, N, j)
         glVertex3f(i, N, j + 1)

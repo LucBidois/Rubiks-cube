@@ -11,7 +11,7 @@ n = 4
 rows = n
 cols = n
 
-# define colours (useful for pygame implementation)
+# define colors (useful for pygame implementation)
 Orange = 'O'  # (255, 130, 0) #Front
 white = 'W'  # (255, 255, 255) #Bottom
 blue = 'B'  # (0, 0, 255) # Right
@@ -21,13 +21,13 @@ yellow = 'Y'  # (255, 255, 0) # Top
 
 
 class Square():
-    """These square's colours will be changable by certain face functions"""
+    """These square's colors will be changable by certain face functions"""
 
-    def __init__(self, row, col, colour):
-        """initially assigned colour by the face"""
+    def __init__(self, row, col, color):
+        """initially assigned color by the face"""
         self.row = row
         self.col = col
-        self.colour = colour
+        self.color = color
 
     def __str__(self):
         "this is the name of this object!"
@@ -36,24 +36,24 @@ class Square():
 
 class Face:
 
-    def __init__(self, name, colour):
+    def __init__(self, name, color):
         self.squares = []
         self.name = name
-        self.colour = colour
+        self.color = color
         for i in range(rows):  # creation of individual squares
             for j in range(cols):
-                self.squares.append(Square(str(i), str(j), self.colour))
-        self.colour = None  # removing attribute to ensure no confusion later
+                self.squares.append(Square(str(i), str(j), self.color))
+        self.color = None  # removing attribute to ensure no confusion later
 
     def __str__(self):  # could be used in pygame
         return self.name
 
-    def colours(self):
-        """returns a tupled list of colours to use before
-        as the 'before' movement when changing colours"""
+    def colors(self):
+        """returns a tupled list of colors to use before
+        as the 'before' movement when changing colors"""
         dummylist = []
         for i in range(0, n ** 2):
-            dummylist.append(self.squares[i].colour)
+            dummylist.append(self.squares[i].color)
         dummylist = tuple(dummylist)
         return dummylist
 
@@ -70,12 +70,12 @@ class Cube(object):
             self.faces.append(Face(i[0], i[1]))
 
     def print_cube(self):
-        """Displays faces with list of their colours"""
+        """Displays faces with list of their colors"""
         for i in range(0, 6):
             print(self.faces[i])
             for j in range(0, n):
-                print(self.faces[i].colours()[4 * j:4 * j + n])
-            # print(self.faces[i].colours())
+                print(self.faces[i].colors()[4 * j:4 * j + n])
+            # print(self.faces[i].colors())
 
     def rotation(self, direction, pos):
         """rotations are always relative to the front face,
@@ -83,9 +83,9 @@ class Cube(object):
 
         if direction == 'right':
             for i in range(0, n):
-                Front.squares[pos * n + i].colour, Right.squares[pos * n + i].colour, Back.squares[pos * n + i].colour, \
-                Left.squares[pos * n + i].colour = Left.squares[pos * n + i].colour, Front.squares[pos * n + i].colour, \
-                                                   Right.squares[pos * n + i].colour, Back.squares[pos * n + i].colour
+                Front.squares[pos * n + i].color, Right.squares[pos * n + i].color, Back.squares[pos * n + i].color, \
+                Left.squares[pos * n + i].color = Left.squares[pos * n + i].color, Front.squares[pos * n + i].color, \
+                                                   Right.squares[pos * n + i].color, Back.squares[pos * n + i].color
 
             if pos == 0:
                 """rotation of the top face"""
@@ -102,17 +102,17 @@ class Cube(object):
 
         if direction == 'up':
             for i in range(0, n):
-                # Front.squares[pos + i*n].colour, Top.squares[pos + i*n].colour, Back.squares[(n-1)-pos + i*n].colour, Bottom.squares[pos + n*i].colour = list(Dummy4)[i], list(Dummy1)[i], list(Dummy2[::-1])[i], list(Dummy3[::-1])[i]
-                Front.squares[pos + i * n].colour, Top.squares[pos + i * n].colour, Back.squares[
-                    (n ** 2 - 1) - (n * i) - pos].colour, Bottom.squares[pos + n * i].colour = Bottom.squares[
-                                                                                                   pos + i * n].colour, \
+                # Front.squares[pos + i*n].color, Top.squares[pos + i*n].color, Back.squares[(n-1)-pos + i*n].color, Bottom.squares[pos + n*i].color = list(Dummy4)[i], list(Dummy1)[i], list(Dummy2[::-1])[i], list(Dummy3[::-1])[i]
+                Front.squares[pos + i * n].color, Top.squares[pos + i * n].color, Back.squares[
+                    (n ** 2 - 1) - (n * i) - pos].color, Bottom.squares[pos + n * i].color = Bottom.squares[
+                                                                                                   pos + i * n].color, \
                                                                                                Front.squares[
-                                                                                                   pos + i * n].colour, \
+                                                                                                   pos + i * n].color, \
                                                                                                Top.squares[
-                                                                                                   pos + i * n].colour, \
+                                                                                                   pos + i * n].color, \
                                                                                                Back.squares[
                                                                                                    (n ** 2 - 1) - (
-                                                                                                               n * i) - pos].colour
+                                                                                                               n * i) - pos].color
 
             if pos == 0:
                 self.Face_Spin_Anticlockwise(2)  # left face
@@ -127,11 +127,11 @@ class Cube(object):
     def Face_Spin_Anticlockwise(self, face):
         """this deals with the complicated spinning faces"""
 
-        dummylist = tuple(self.faces[face].colours())  # list of squares on top
+        dummylist = tuple(self.faces[face].colors())  # list of squares on top
         for j in range(0, n):
             placeholder = 3 - j
             for i in range(0, n):
-                self.faces[face].squares[i + 4 * j].colour = dummylist[placeholder]
+                self.faces[face].squares[i + 4 * j].color = dummylist[placeholder]
                 if placeholder > 12:
                     placeholder -= 12
                 else:

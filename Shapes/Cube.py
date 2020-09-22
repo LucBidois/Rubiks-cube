@@ -10,18 +10,16 @@ from Shapes.Face import Face
 class Cube(object):
 
     def __init__(self):
-        self.faces = []
-        for i in [('Front', COLORS["orange"]), ('Back', COLORS["red"]),
-                  ('Left', COLORS["green"]), ('Right', COLORS["blue"]),
-                  ('Top', COLORS["yellow"]), ('Bottom', COLORS["white"])]:
-            self.faces.append(Face(i[0], i[1]))
+        self.faces = [Face('Front', COLORS["orange"]), Face('Back', COLORS["red"]),
+                      Face('Left', COLORS["green"]), Face('Right', COLORS["blue"]),
+                      Face('Top', COLORS["yellow"]), Face('Bottom', COLORS["white"])]
 
     def print_cube(self):
-        """Displays faces with list of their colours in interpreter"""
+        """Displays faces with list of their colors in interpreter"""
         for face in range(0, 6):
             print(self.faces[face])
             for j in range(0, N):
-                print(self.faces[face].colours()[4 * j:4 * j + N])
+                print(self.faces[face].colors()[4 * j:4 * j + N])
 
     def rotation(self, direction, pos):
         """rotations are always relative to the front face,
@@ -31,9 +29,9 @@ class Cube(object):
 
         if direction == 'right':
             for i in range(0, N):
-                Front.squares[pos * N + i].colour, Right.squares[pos * N + i].colour, Back.squares[pos * N + i].colour, \
-                Left.squares[pos * N + i].colour = Left.squares[pos * N + i].colour, Front.squares[pos * N + i].colour, \
-                                                   Right.squares[pos * N + i].colour, Back.squares[pos * N + i].colour
+                Front.squares[pos * N + i].color, Right.squares[pos * N + i].color, Back.squares[pos * N + i].color, \
+                Left.squares[pos * N + i].color = Left.squares[pos * N + i].color, Front.squares[pos * N + i].color, \
+                                                   Right.squares[pos * N + i].color, Back.squares[pos * N + i].color
 
             if pos == 0:
                 """rotation of the top face"""
@@ -50,16 +48,16 @@ class Cube(object):
 
         if direction == 'up':
             for i in range(0, N):
-                Front.squares[pos + i * N].colour, Top.squares[pos + i * N].colour, Back.squares[
-                    (N ** 2 - 1) - (N * i) - pos].colour, Bottom.squares[pos + N * i].colour = Bottom.squares[
-                                                                                                   pos + i * N].colour, \
+                Front.squares[pos + i * N].color, Top.squares[pos + i * N].color, Back.squares[
+                    (N ** 2 - 1) - (N * i) - pos].color, Bottom.squares[pos + N * i].color = Bottom.squares[
+                                                                                                   pos + i * N].color, \
                                                                                                Front.squares[
-                                                                                                   pos + i * N].colour, \
+                                                                                                   pos + i * N].color, \
                                                                                                Top.squares[
-                                                                                                   pos + i * N].colour, \
+                                                                                                   pos + i * N].color, \
                                                                                                Back.squares[
                                                                                                    (N ** 2 - 1) - (
-                                                                                                           N * i) - pos].colour
+                                                                                                           N * i) - pos].color
 
             if pos == 0:
                 self.Face_Spin_Anticlockwise(2)  # left face
@@ -74,15 +72,15 @@ class Cube(object):
     def Face_Spin_Anticlockwise(self, face):
         """this deals with the complicated spinning faces"""
 
-        old_Colours = tuple(self.faces[face].colours())  # list of squares on top
+        old_colors = tuple(self.faces[face].colors())  # list of squares on top
         for j in range(0, N):
-            colour_Index = (N - 1) - j
+            color_Index = (N - 1) - j
             for i in range(0, N):
-                self.faces[face].squares[i + N * j].colour = old_Colours[colour_Index]
-                if colour_Index > N * (N - 1):
-                    colour_Index -= N * (N - 1)
+                self.faces[face].squares[i + N * j].color = old_colors[color_Index]
+                if color_Index > N * (N - 1):
+                    color_Index -= N * (N - 1)
                 else:
-                    colour_Index += N
+                    color_Index += N
 
     def scramble(self):
         "I have defined 4*n moves"

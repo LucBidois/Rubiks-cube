@@ -3,7 +3,7 @@ N = 4
 ROWS = N
 COLS = N
 
-# define colours (useful for pygame implementation)
+# define colors (useful for pygame implementation)
 COLORS = {
     "red": (0.5, 0, 0),  # (255, 0, 0) # Back
     "orange": (1.0, 0.5, 0),  # (255, 130, 0) # Front
