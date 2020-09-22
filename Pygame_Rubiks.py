@@ -72,4 +72,5 @@ def main():
 
 Rubiks = Cube()
 
-main()
+if __name__ == "__main__":
+    main()
