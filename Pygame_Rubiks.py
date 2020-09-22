@@ -23,7 +23,7 @@ def main():
     glTranslate(0, 0, -20)
     glRotate(35, 1, -1, 0)
 
-    x = 0
+    position = 0
     while True:
 
         for event in pygame.event.get():
@@ -34,32 +34,32 @@ def main():
             if event.type == pygame.KEYDOWN:
 
                 print(event)
-                print(x)
+                print(position)
 
                 if event.key == pygame.K_RETURN:
                     Rubiks.scramble()
 
                 if event.key == pygame.K_KP_PLUS:
-                    x += 1
-                    if x >= N:
-                        x -= 1
+                    position += 1
+                    if position >= N:
+                        position -= 1
 
                 if event.key == pygame.K_KP_MINUS:
-                    x -= 1
-                    if x < 0:
-                        x += 1
+                    position -= 1
+                    if position < 0:
+                        position += 1
 
                 if event.key == pygame.K_LEFT:
-                    Rubiks.rotation('left', x)
+                    Rubiks.rotation('left', position)
 
                 if event.key == pygame.K_RIGHT:
-                    Rubiks.rotation('right', x)
+                    Rubiks.rotation('right', position)
 
                 if event.key == pygame.K_UP:
-                    Rubiks.rotation('up', x)
+                    Rubiks.rotation('up', position)
 
                 if event.key == pygame.K_DOWN:
-                    Rubiks.rotation('down', x)
+                    Rubiks.rotation('down', position)
 
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
